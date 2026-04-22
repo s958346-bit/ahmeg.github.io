@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Plastic Tide | Act Now – Animated Experience</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: radial-gradient(circle at 10% 30%, #021217, #001d24);
+      font-family: 'Poppins', 'Segoe UI', system-ui, -apple-system, 'Inter', sans-serif;
+      padding: 1.5rem;
+      color: #eef5ff;
+      scroll-behavior: smooth;
+    }
+
+    /* custom scroll */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #022b30;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #ff9f4a;
+      border-radius: 10px;
+    }
+
+    .glass-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      background: rgba(10, 35, 40, 0.65);
+      backdrop-filter: blur(12px);
+      border-radius: 3rem;
+      padding: 2rem 2rem 2rem 2rem;
+      box-shadow: 0 30px 45px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 180, 70, 0.2);
+      transition: all 0.2s;
+    }
+
+    /* animated header glow */
+    h1 {
+      font-size: 3.4rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #FFF5CF, #FFC47E, #FFA559);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 8px rgba(255,165,70,0.4);
+      animation: titlePulse 2.2s infinite ease-in-out;
+    }
+
+    @keyframes titlePulse {
+      0% { opacity: 0.95; text-shadow: 0 0 2px #ffa559; }
+      50% { opacity: 1; text-shadow: 0 0 18px #ffb347; }
+      100% { opacity: 0.95; text-shadow: 0 0 2px #ffa559; }
+    }
+
+    .curiosity-sub {
+      text-align: center;
+      font-size: 1.5rem;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.4);
+      display: inline-block;
+      width: 100%;
+      padding: 0.9rem;
+      border-radius: 80px;
+      margin: 0.5rem 0 1.8rem 0;
+      border-left: 4px solid #ffa559;
+      border-right: 4px solid #ffa559;
+      backdrop-filter: blur(4px);
+    }
+
+    .curiosity-sub span {
+      color: #ffcd94;
+      font-style: italic;
+    }
+
+    /* EPIC BUTTON + ANIMATION (payoff structure) */
+    .action-zone {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+      margin: 2rem 0 2.2rem;
+    }
+
+    .epic-btn {
+      position: relative;
+      background: linear-gradient(95deg, #ff8c42, #ff5e1a);
+      border: none;
+      padding: 1rem 2.2rem;
+      font-size: 1.25rem;
+      font-weight: bold;
+      font-family: inherit;
+      color: #021217;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 8px 0 #853a00;
+      overflow: hidden;
+      z-index: 1;
+      letter-spacing: 1px;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .epic-btn::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, #ffb347, #ffe0a3);
+      transition: 0.4s ease;
+      z-index: -1;
+    }
+
+    .epic-btn:hover::before {
+      left: 0;
+    }
+
+    .epic-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 0 #6b2e00;
+      color: #001c22;
+    }
+
+    .epic-btn:active {
+      transform: translateY(5px);
+      box-shadow: 0 4px 0 #6b2e00;
+    }
+
+    /* ripple effect for special button */
+    .ripple-btn {
+      background: #0f525c;
+      box-shadow: 0 8px 0 #053137;
+      color: #fff3e0;
+    }
+
+    .ripple-btn::before {
+      background: linear-gradient(90deg, #2f9e8c, #64c7b3);
+    }
+
+    /* floating cards animation */
+    .info-card {
+      background: rgba(15, 55, 60, 0.7);
+      border-radius: 2rem;
+      padding: 1.6rem;
+      margin: 1.8rem 0;
+      transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(255, 165, 70, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+      background: rgba(25, 75, 80, 0.85);
+      border-color: #ffa559;
+      box-shadow: 0 20px 28px -12px black;
+    }
+
+    h2 {
+      font-size: 1.9rem;
+      border-left: 7px solid #ffa559;
+      padding-left: 1rem;
+      margin: 0.8rem 0 1rem;
+      font-weight: 600;
+    }
+
+    .stats-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.3rem;
+      margin: 1.5rem 0;
+    }
+
+    .stat-block {
+      flex: 1;
+      background: #021e24b3;
+      border-radius: 1.6rem;
+      padding: 1rem;
+      text-align: center;
+      font-weight: bold;
+      transition: all 0.2s;
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: #ffbc6e;
+      display: block;
+    }
+
+    /* animated slogan box */
+    .slogan-box {
+      background: linear-gradient(125deg, #ffa03a20, #ff5e1a20);
+      text-align: center;
+      padding: 1.8rem;
+      border-radius: 3rem;
+      margin: 2rem 0;
+      border: 2px dashed #ffaa55;
+      animation: glowPulse 2s infinite;
+    }
+
+    @keyframes glowPulse {
+      0% { border-color: #ffaa55; box-shadow: 0 0 5px #ffaa55; }
+      50% { border-color: #ffdd99; box-shadow: 0 0 22px #ffaa77; }
+      100% { border-color: #ffaa55; box-shadow: 0 0 5px #ffaa55; }
+    }
+
+    .slogan-text {
+      font-size: 1.9rem;
+      font-weight: 800;
+      letter-spacing: -0.3px;
+      background: linear-gradient(135deg, #FFE3B5, #FFB347);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .action-checklist {
+      list-style: none;
+      margin: 1rem 0;
+    }
+
+    .action-checklist li {
+      margin: 0.8rem 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.05rem;
+    }
+
+    .check-icon {
+      font-size: 1.6rem;
+      filter: drop-shadow(0 2px 2px black);
+    }
+
+    .img-suggest {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+      margin: 1.5rem 0;
+    }
+
+    .img-tile {
+      background: #02171c;
+      border-radius: 1.5rem;
+      padding: 0.8rem 1.2rem;
+      width: 160px;
+      text-align: center;
+      transition: 0.2s;
+    }
+
+    .img-tile:hover {
+      background: #ff8c4233;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    button, .epic-btn {
+      user-select: none;
+    }
+
+    @media (max-width: 700px) {
+      .glass-container {
+        padding: 1rem;
+      }
+      h1 {
+        font-size: 2rem;
+      }
+      .slogan-text {
+        font-size: 1.3rem;
+      }
+      .epic-btn {
+        padding: 0.7rem 1.2rem;
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="glass-container">
+  
+  <!-- HEADER WITH ANIMATION -->
+  <h1>🌊 PLASTIC NEVER DIES</h1>
+  <div class="curiosity-sub">
+    ✨ <span>“That plastic bag you threw away? It came back.”</span> ✨
+  </div>
+
+  <!-- BUTTONS: EPIC STRUCTURE (payoff, interactive, cool) -->
+  <div class="action-zone">
+    <button class="epic-btn" id="revealFactBtn">🔬 SHOCKING FACT →</button>
+    <button class="epic-btn ripple-btn" id="pledgeBtn">🌱 I PLEDGE TO ACT 🌱</button>
+    <button class="epic-btn" id="sloganBoostBtn">💥 DROP SLOGAN</button>
+  </div>
+
+  <!-- Dynamic alert / feedback zone (smooth animation) -->
+  <div id="feedbackZone" style="text-align: center; margin: 5px 0 15px; font-weight: bold; min-height: 65px;"></div>
+
+  <!-- SECTION 1 : BOTTLE JOURNEY -->
+  <div class="info-card">
+    <h2>🗺️ You won't believe where your plastic bottle ends up</h2>
+    <p>You buy a drink, finish it in five minutes, toss it. But that bottle doesn't vanish. It travels to a landfill or gets swept into a drain → river → ocean. Waves and sun tear it into <strong>microplastics</strong> – invisible killers. Fish eat them. You eat the fish. <strong>Your own bottle returns inside you.</strong> Scientists now find microplastics in human blood, lungs, and unborn babies. Plastic never leaves; it just migrates home — to your dinner plate.</p>
+    <div style="background:#031f25; border-radius: 1.5rem; padding: 0.8rem; margin-top: 0.5rem;">
+      🧪 <em>“Every piece of plastic ever created still exists on our planet – except the small fraction we've burned.”</em>
+    </div>
+  </div>
+
+  <!-- SECTION 2 : BOTTLE DANGER -->
+  <div class="info-card">
+    <h2>🧴 There's something in your plastic bottle. And it's not safe.</h2>
+    <p>The label says “pure spring water” — but heat makes plastic leach. A bottle left in a warm car releases <strong>microplastics + hormone-disrupting chemicals</strong>. You can't see them, but each sip adds another dose. Studies show that people who drink mostly bottled water swallow tens of thousands of microplastic particles every year. Is that “pure” refreshment worth the hidden poison?</p>
+  </div>
+
+  <!-- SECTION 3 : THE BAG EFFECT + daily life -->
+  <div class="info-card">
+    <h2>♻️ That plastic bag you threw away? It came back (stronger).</h2>
+    <p>It clogs drains, floats to the sea, breaks into fragments. Those fragments ride the current into seafood, table salt, tap water, and even the air you breathe. Microplastics have been found in Arctic snow and rain. Your daily life: plastic in your tea (from tea bags), in your clothes (polyester shedding), in the dust at home. <strong>No escape — but we CAN fight back.</strong></p>
+  </div>
+
+  <!-- STATS & EFFECTS (health, daily, environment) -->
+  <div class="stats-grid">
+    <div class="stat-block">
+      <span class="stat-number">❤️‍🩹 83%</span>
+      <span>of human blood samples contain microplastics (recent study)</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-number">🏠 11,000+</span>
+      <span>microplastic particles per year from eating seafood</span>
+    </div>
+    <div class="stat-block">
+      <span class="stat-number">🐢 1M+</span>
+      <span>marine animals die yearly due to plastic</span>
+    </div>
+  </div>
+
+  <!-- MAIN MESSAGE: WHAT TO DO AFTER -->
+  <div class="info-card" style="background: #07363eb3;">
+    <h2>🎯 YOUR MISSION – what the audience MUST DO</h2>
+    <ul class="action-checklist">
+      <li><span class="check-icon">💧</span> <strong>Switch to a reusable bottle</strong> – saves up to 167 plastic bottles/year</li>
+      <li><span class="check-icon">🛍️</span> <strong>Refuse plastic bags & straws</strong> – carry a cloth tote</li>
+      <li><span class="check-icon">🗑️</span> <strong>Pick 3 pieces of plastic every day</strong> – stops ocean pollution</li>
+      <li><span class="check-icon">📢</span> <strong>Talk & share</strong> – one conversation doubles the impact</li>
+      <li><span class="check-icon">⚡</span> <strong>Choose reuse over single-use</strong> (cutlery, cups, wrappers)</li>
+    </ul>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 20px;">
+      <button class="epic-btn" id="actionReminderBtn">✅ I WILL ACT TODAY</button>
+    </div>
+  </div>
+
+  <!-- SLOGAN & CALL TO ACTION (animated) -->
+  <div class="slogan-box" id="sloganBox">
+    <div class="slogan-text" id="dynamicSlogan">🌊 “The plastic you throw always comes home.” 🌊</div>
+    <div style="margin-top: 12px; font-size: 0.9rem;">🔥 Don't feed the plastic. It bites back. 🔥</div>
+  </div>
+
+  <!-- IMAGE SUGGESTIONS (SEARCH KEYWORDS) -->
+  <h2>📸(search these)</h2>
+  <div class="img-suggest">
+    <div class="img-tile">🐢 "turtle plastic bag ocean"</div>
+    <div class="img-tile">🧴 "microplastics in water glass"</div>
+    <div class="img-tile">🐟 "fish eating microplastic"</div>
+    <div class="img-tile">🗑️ "plastic bottle floating ocean"</div>
+    <div class="img-tile">🌊 "microplastics in human hand"</div>
+  </div>
+
+  <!-- RESOURCES & LINKS (credibility) -->
+  <div style="background: #00181e; border-radius: 1.8rem; padding: 1.3rem; margin-top: 1rem;">
+    <h2 style="margin-top: 0;">📚 Real sources (trusted info)</h2>
+    <ul style="margin-left: 1.2rem; line-height: 1.5;">
+      <li>🌍 <strong>National Geographic</strong> – “Plastic bag at the bottom of the ocean” → <a href="#" style="color:#ffb347;">education.nationalgeographic.org</a></li>
+      <li>🇺🇳 <strong>United Nations Environment Programme (UNEP)</strong> – Plastic crisis reports & facts</li>
+      <li>🔬 <strong>ScienceDirect</strong> – “Micro(nano)plastics in human blood” (peer-reviewed study)</li>
+      <li>🌱 <strong>Geneva Environment Network</strong> – Global plastic pollution updates</li>
+    </ul>
+    <p style="font-size: 0.85rem; margin-top: 12px;">✅ All data aligns with 2025 UN & scientific research reports.</p>
+  </div>
+
+  <footer>
+    🌟 Created by Ahmed Mohammed – Grade 7J | Every click, every action saves marine life.<br>
+    ⏳ The ocean doesn't have time to wait. Be the change.
+  </footer>
+</div>
+
+<script>
+  // ANIMATION & BUTTON EPIC STRUCTURE: not just reading, interactive and rewarding
+  const feedbackDiv = document.getElementById('feedbackZone');
+  const dynamicSlogan = document.getElementById('dynamicSlogan');
+  const sloganBox = document.getElementById('sloganBox');
+
+  // helper to show temporary feedback with cool emojis
+  function showMessage(msg, isSuccess = true) {
+    feedbackDiv.innerHTML = `<div style="background:${isSuccess ? '#ffaa3355' : '#ff5e5e55'}; padding:10px 18px; border-radius:60px; backdrop-filter:blur(4px); display:inline-block; animation:fadeSlide 0.4s ease;">${msg}</div>`;
+    setTimeout(() => {
+      if(feedbackDiv.innerHTML.includes(msg)) feedbackDiv.innerHTML = '';
+    }, 2800);
+  }
+
+  // Fact reveal button
+  document.getElementById('revealFactBtn').addEventListener('click', () => {
+    const facts = [
+      "⚠️ By 2050, there could be more plastic than fish in the ocean (by weight).",
+      "🧪 Humans ingest about a credit card's worth of plastic EVERY WEEK.",
+      "🌊 73% of beach litter worldwide is plastic: bottles, bags, straws.",
+      "🐋 A sperm whale washed ashore with 100+ plastic cups and 4 plastic bottles in its stomach.",
+      "💧 94% of US tap water samples contain microplastic fibers."
+    ];
+    const randomFact = facts[Math.floor(Math.random() * facts.length)];
+    showMessage(`🔎 ${randomFact}`, true);
+    // also micro-interaction: ripple effect vibe
+  });
+
+  // Pledge button (with cool counter or confirm)
+  let pledgeCount = 0;
+  document.getElementById('pledgeBtn').addEventListener('click', () => {
+    pledgeCount++;
+    showMessage(`🌿 PLEDGE ACCEPTED! You are #${pledgeCount} to say NO to single-use plastic. You rock! 🌿`, true);
+    // also animate slogan box quickly
+    sloganBox.style.transform = 'scale(1.01)';
+    setTimeout(() => { sloganBox.style.transform = 'scale(1)'; }, 200);
+  });
+
+  // Slogan booster: rotate slogans (cool animation)
+  const slogans = [
+    "🌊 “The plastic you throw always comes home.” 🌊",
+    "🔥 “Don't feed the plastic. It bites back.” 🔥",
+    "💪 “Stop throwing. Start saving. Choose life.” 💪",
+    "♻️ “Your trash. Your problem. Your solution.” ♻️",
+    "🧴 “Plastic never dies — neither should our ocean.” 🧴",
+    "🚫 “Break up with plastic. Your body will thank you.” 🚫"
+  ];
+  let sloganIndex = 0;
+  document.getElementById('sloganBoostBtn').addEventListener('click', () => {
+    sloganIndex = (sloganIndex + 1) % slogans.length;
+    dynamicSlogan.style.opacity = '0';
+    setTimeout(() => {
+      dynamicSlogan.textContent = slogans[sloganIndex];
+      dynamicSlogan.style.transition = '0.2s';
+      dynamicSlogan.style.opacity = '1';
+    }, 120);
+    showMessage(`✨ NEW SLOGAN: “${slogans[sloganIndex].replace(/[^\w\s]/g,'').substring(0, 45)}...” ✨`, true);
+    // playful bounce
+    sloganBox.style.animation = 'none';
+    setTimeout(() => { sloganBox.style.animation = 'glowPulse 2s infinite'; }, 10);
+  });
+
+  // action reminder button - what should audience do after seeing this? (direct callback)
+  document.getElementById('actionReminderBtn').addEventListener('click', () => {
+    showMessage(`🎯 ACTION PLAN READY: 1) Use reusable bottle. 2) Say no to plastic bags. 3) Pick 3 pieces of trash daily. 4) Share! You've got this 💪🌎`, true);
+    // extra ripple on container
+    const container = document.querySelector('.glass-container');
+    container.style.transform = 'scale(0.99)';
+    setTimeout(() => { container.style.transform = 'scale(1)'; }, 150);
+  });
+
+  // Add hover + particle-like vibe to all epic buttons (already styled)
+  // Additional effect: when clicking "I will act today" we show final reminder
+  const checkButtons = document.querySelectorAll('.epic-btn');
+  checkButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      // create micro ripple inside button
+      let ripple = document.createElement('span');
+      ripple.classList.add('ripple-span');
+      ripple.style.position = 'absolute';
+      ripple.style.backgroundColor = 'rgba(255,255,200,0.7)';
+      ripple.style.borderRadius = '50%';
+      ripple.style.transform = 'scale(0)';
+      ripple.style.animation = 'rippleAnim 0.5s linear';
+      ripple.style.width = '40px';
+      ripple.style.height = '40px';
+      ripple.style.left = `${e.offsetX - 20}px`;
+      ripple.style.top = `${e.offsetY - 20}px`;
+      ripple.style.pointerEvents = 'none';
+      btn.style.position = 'relative';
+      btn.style.overflow = 'hidden';
+      btn.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 500);
+    });
+  });
+
+  // inject keyframes for ripple (if not exists)
+  const styleSheet = document.createElement("style");
+  styleSheet.textContent = `
+    @keyframes rippleAnim {
+      0% { transform: scale(0); opacity: 0.8; }
+      100% { transform: scale(8); opacity: 0; }
+    }
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .info-card, .stat-block, .img-tile {
+      transition: all 0.2s ease;
+    }
+  `;
+  document.head.appendChild(styleSheet);
+
+  // one more big CTA: after reading, page shows main message again in console but also scroll message
+  console.log("%c🌊 STOP PLASTIC POLLUTION – Every action counts! Share the webpage 💙", "color: #ffaa55; font-size: 16px");
+  
+  // set initial feedback greeting
+  setTimeout(() => {
+    showMessage("💡 Click the buttons above — shocking facts, pledges & rotating slogans!", false);
+  }, 800);
+</script>
+</body>
+</html>
+
