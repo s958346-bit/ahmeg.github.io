@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodiversity & The Arabian Oryx - Ahmed Mohamed 7J | Al Nahda School</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0a1f1c;
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+            color: #e0e0e0;
+        }
+        /* ========== SIDEBAR ========== */
+        .sidebar {
+            width: 280px;
+            background: #061412;
+            border-right: 2px solid #1a3a34;
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+            overflow-y: auto;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .logo-area {
+            text-align: center;
+            padding: 10px 20px 25px;
+            border-bottom: 1px solid #1a3a34;
+            margin-bottom: 15px;
+        }
+        .logo-area img {
+            width: 85px;
+            height: 85px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #c9a84c;
+            background: white;
+            padding: 5px;
+            margin-bottom: 10px;
+        }
+        .logo-area h3 {
+            color: #c9a84c;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .logo-area .student-name {
+            color: #7eb8a0;
+            font-size: 0.8rem;
+            margin-top: 8px;
+            font-weight: bold;
+        }
+        .sidebar nav {
+            flex: 1;
+            padding: 0 10px;
+        }
+        .sidebar nav a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 18px;
+            margin: 4px 0;
+            border-radius: 10px;
+            text-decoration: none;
+            color: #b0c7c1;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        .sidebar nav a i {
+            width: 22px;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #c9a84c;
+        }
+        .sidebar nav a:hover {
+            background: #132e28;
+            color: #ffffff;
+            transform: translateX(5px);
+        }
+        .sidebar nav a.active {
+            background: #1a3a34;
+            color: #ffffff;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            border-left: 4px solid #c9a84c;
+        }
+        .sidebar-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #1a3a34;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #5a7a6e;
+        }
+        /* ========== MAIN CONTENT ========== */
+        .main-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 30px 40px;
+            background: linear-gradient(180deg, #0d2620 0%, #0a1f1c 100%);
+            scroll-behavior: smooth;
+        }
+        .section {
+            display: none;
+            animation: fadeSlide 0.5s ease;
+        }
+        .section.active-section {
+            display: block;
+        }
+        @keyframes fadeSlide {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .section h2 {
+            font-size: 2.2rem;
+            color: #c9a84c;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #1a3a34;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section h3 {
+            color: #e0c87a;
+            margin: 25px 0 12px;
+            font-size: 1.4rem;
+        }
+        .card {
+            background: #0e221d;
+            border: 1px solid #1a3a34;
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.2s ease;
+        }
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: #c9a84c;
+        }
+        .card img {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 2px solid #2a4a3e;
+        }
+        .image-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 15px 0;
+        }
+        .image-row img {
+            flex: 1;
+            min-width: 200px;
+            max-height: 250px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 2px solid #2a4a3e;
+        }
+        .solution-list, .threat-list, .effort-list, .oryx-list {
+            list-style: none;
+            padding: 0;
+        }
+        .solution-list li, .threat-list li, .effort-list li, .oryx-list li {
+            padding: 12px 18px;
+            margin: 8px 0;
+            background: #132620;
+            border-radius: 10px;
+            border-left: 4px solid #c9a84c;
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+        .solution-list li:hover, .threat-list li:hover, .effort-list li:hover, .oryx-list li:hover {
+            background: #1a352b;
+            transform: translateX(4px);
+        }
+        .highlight-box {
+            background: #1a352b;
+            border: 2px dashed #c9a84c;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+            font-weight: bold;
+            color: #e0c87a;
+        }
+        .process-chain {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            color: #c9a84c;
+        }
+        .process-chain span {
+            background: #132620;
+            padding: 10px 18px;
+            border-radius: 30px;
+            border: 1px solid #c9a84c;
+        }
+        .student-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #1a352b;
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #c9a84c;
+            margin-bottom: 10px;
+            border: 1px solid #3a5a4e;
+        }
+        .main-content::-webkit-scrollbar,
+        .sidebar::-webkit-scrollbar { width: 6px; }
+        .main-content::-webkit-scrollbar-track,
+        .sidebar::-webkit-scrollbar-track { background: #061412; }
+        .main-content::-webkit-scrollbar-thumb,
+        .sidebar::-webkit-scrollbar-thumb { background: #2a4a3e; border-radius: 10px; }
+        @media (max-width: 768px) {
+            .sidebar { width: 220px; }
+            .main-content { padding: 20px; }
+            .image-row { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== SIDEBAR ==================== -->
+    <aside class="sidebar">
+        <div class="logo-area">
+            <!-- Al Nahda School Logo (Replace with actual logo link if available) -->
+            <img src="https://via.placeholder.com/150/FFFFFF/0a1f1c?text=AL+NAHDA+SCHOOL" 
+                 alt="Al Nahda School Logo" 
+                 onerror="this.onerror=null; this.src='https://cdn-icons-png.flaticon.com/512/2602/2602414.png';">
+            <h3>Al Nahda School</h3>
+            <div class="student-name">
+                <i class="fas fa-user-graduate"></i> Ahmed Mohamed <br> Class: 7J
+            </div>
+        </div>
+        <nav>
+            <a href="#home" class="active" onclick="showSection('home', this)"><i class="fas fa-home"></i> Home</a>
+            <a href="#what-is-biodiversity" onclick="showSection('what-is-biodiversity', this)"><i class="fas fa-leaf"></i> What is Biodiversity?</a>
+            <a href="#about-oryx" onclick="showSection('about-oryx', this)"><i class="fas fa-paw"></i> About the Arabian Oryx</a>
+            <a href="#variation-adaptation" onclick="showSection('variation-adaptation', this)"><i class="fas fa-dna"></i> Variation & Adaptation</a>
+            <a href="#natural-selection" onclick="showSection('natural-selection', this)"><i class="fas fa-filter"></i> Natural Selection</a>
+            <a href="#threats" onclick="showSection('threats', this)"><i class="fas fa-exclamation-triangle"></i> Threats</a>
+            <a href="#uae-efforts" onclick="showSection('uae-efforts', this)"><i class="fas fa-shield-alt"></i> UAE Conservation</a>
+            <a href="#solution" onclick="showSection('solution', this)"><i class="fas fa-lightbulb"></i> The Solution</a>
+            <a href="#conclusion" onclick="showSection('conclusion', this)"><i class="fas fa-check-circle"></i> Conclusion</a>
+            <a href="#references" onclick="showSection('references', this)"><i class="fas fa-book"></i> References</a>
+        </nav>
+        <div class="sidebar-footer">© 2026 Ahmed Mohamed 7J<br>Biodiversity Project</div>
+    </aside>
+
+    <!-- ==================== MAIN CONTENT ==================== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- HOME -->
+        <div id="home" class="section active-section">
+            <span class="student-badge"><i class="fas fa-user"></i> Ahmed Mohamed | Class 7J | Al Nahda School</span>
+            <h2><i class="fas fa-globe-asia"></i> Biodiversity & The Arabian Oryx</h2>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Arabian_oryx_%28Oryx_leucoryx%29.jpg/1280px-Arabian_oryx_%28Oryx_leucoryx%29.jpg" alt="Arabian Oryx">
+                <h3>Welcome to My Project</h3>
+                <p>This website explores <strong>biodiversity</strong> — the incredible variety of life on Earth. We will learn what biodiversity is, how <strong>variation</strong> and <strong>adaptation</strong> work, what <strong>natural selection</strong> means, the <strong>threats</strong> facing nature, and the amazing <strong>conservation efforts</strong> in the UAE.</p>
+                <p>Our hero is the <strong>Arabian Oryx</strong>, a beautiful white antelope that was once extinct in the wild but was saved by the vision of the late <strong>Sheikh Zayed bin Sultan Al Nahyan</strong>.</p>
+                <div class="highlight-box"><i class="fas fa-star"></i> The Arabian Oryx: First species ever upgraded from "Extinct in the Wild" to "Vulnerable" (2011) <i class="fas fa-star"></i></div>
+            </div>
+        </div>
+
+        <!-- WHAT IS BIODIVERSITY -->
+        <div id="what-is-biodiversity" class="section">
+            <h2><i class="fas fa-seedling"></i> What is Biodiversity?</h2>
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2016/11/14/04/45/elephant-1822636_1280.jpg" alt="Diverse wildlife">
+                <h3>Simple Explanation</h3>
+                <p><strong>Biodiversity</strong> just means all the different kinds of life on Earth. Every animal, every plant, every tiny bug — even the ones you can't see. They all work together to give us the air we breathe, the water we drink, and the food we eat.</p>
+                <p>Think of it as <strong>nature's life support system</strong>. If we lose too many pieces, the whole system breaks. So protecting biodiversity is really just protecting ourselves.</p>
+                <div class="highlight-box"><i class="fas fa-quote-left"></i> Biodiversity = Variety of Life on Earth <i class="fas fa-quote-right"></i></div>
+            </div>
+        </div>
+
+        <!-- ABOUT THE ARABIAN ORYX -->
+        <div id="about-oryx" class="section">
+            <h2><i class="fas fa-paw"></i> About the Arabian Oryx</h2>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Arabian_oryx_%28Oryx_leucoryx%29.jpg/1280px-Arabian_oryx_%28Oryx_leucoryx%29.jpg" alt="Arabian Oryx in the UAE desert">
+                <h3>The National Animal of the UAE</h3>
+                <p>The Arabian Oryx is a medium-sized antelope native to the Arabian Peninsula. It is the <strong>national animal of the UAE</strong> and a symbol of beauty, strength, and cultural heritage [citation:3].</p>
+                <p>Historically abundant across the region, the oryx was declared <strong>extinct in the wild in the early 1970s</strong> due to overhunting [citation:2][citation:5]. However, visionary conservation saved it from disappearing forever.</p>
+                <h3>Unique Adaptations</h3>
+                <ul class="oryx-list">
+                    <li><i class="fas fa-water"></i> Can detect rainfall and fresh plant growth from up to <strong>90km away</strong> [citation:3][citation:5].</li>
+                    <li><i class="fas fa-shoe-prints"></i> Broad hooves help it walk easily on soft desert sand [citation:3][citation:5].</li>
+                    <li><i class="fas fa-thermometer-half"></i> A unique head circulation system keeps it cool in extreme heat [citation:3][citation:5].</li>
+                    <li><i class="fas fa-baby"></i> Calves can stand and walk within just <strong>one hour of birth</strong> [citation:3].</li>
+                </ul>
+                <div class="highlight-box"><i class="fas fa-globe"></i> The Arabian Oryx inspired the legend of the unicorn due to its long, straight horns when seen from the side!</div>
+            </div>
+        </div>
+
+        <!-- VARIATION & ADAPTATION -->
+        <div id="variation-adaptation" class="section">
+            <h2><i class="fas fa-dna"></i> Variation & Adaptation</h2>
+            <div class="card">
+                <div class="image-row">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/camel-1867132_1280.jpg" alt="Camel">
+                    <img src="https://cdn.pixabay.com/photo/2016/11/29/03/53/polar-bear-1867129_1280.jpg" alt="Polar bear">
+                </div>
+                <h3>Variation</h3>
+                <p><strong>Variation</strong> means no two living things are exactly alike. These small differences help some survive better than others.</p>
+                <h3>Adaptation</h3>
+                <p>Over millions of years, living things change to survive where they live. This is <strong>adaptation</strong>.</p>
+                <ul class="solution-list">
+                    <li><i class="fas fa-check"></i> A <strong>camel</strong> stores fat in its hump to survive the desert.</li>
+                    <li><i class="fas fa-check"></i> A <strong>polar bear</strong> has thick white fur for the freezing Arctic.</li>
+                    <li><i class="fas fa-check"></i> The <strong>Arabian Oryx</strong> can sense rain from far away and walk toward it.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- NATURAL SELECTION -->
+        <div id="natural-selection" class="section">
+            <h2><i class="fas fa-filter"></i> Natural Selection</h2>
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2018/08/12/16/59/parrot-3601194_1280.jpg" alt="Colorful birds">
+                <h3>How Nature Chooses</h3>
+                <p>The ones with helpful traits survive longer and have more babies. The weak ones die off. This is <strong>natural selection</strong>.</p>
+                <p>Over time, helpful traits spread. Life changes to fit its home. That's <strong>adaptation</strong>.</p>
+                <div class="process-chain">
+                    <span>Variation</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Natural Selection</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Adaptation</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Biodiversity</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- THREATS -->
+        <div id="threats" class="section">
+            <h2><i class="fas fa-exclamation-triangle"></i> Threats to Biodiversity</h2>
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2018/05/07/10/49/deforestation-3380548_1280.jpg" alt="Deforestation">
+                <h3>What's Harming Nature?</h3>
+                <ul class="threat-list">
+                    <li><i class="fas fa-tree"></i> <strong>Habitat loss</strong> – Cutting down forests and building cities.</li>
+                    <li><i class="fas fa-crosshairs"></i> <strong>Overhunting</strong> – Like the Arabian Oryx, hunted until extinct in the wild by 1972.</li>
+                    <li><i class="fas fa-flask"></i> <strong>Pollution</strong> – Poisoning air, water, and soil.</li>
+                    <li><i class="fas fa-temperature-high"></i> <strong>Climate change</strong> – Rising temperatures.</li>
+                    <li><i class="fas fa-spider"></i> <strong>Invasive species</strong> – New species that kill native ones.</li>
+                </ul>
+                <div class="highlight-box"><i class="fas fa-skull-crossbones"></i> Result: Species go extinct. When nature suffers, we suffer too.</div>
+            </div>
+        </div>
+
+        <!-- UAE CONSERVATION EFFORTS -->
+        <div id="uae-efforts" class="section">
+            <h2><i class="fas fa-shield-alt"></i> UAE Conservation Efforts</h2>
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Oryx_leucoryx_-_Sir_Bani_Yas.jpg/1280px-Oryx_leucoryx_-_Sir_Bani_Yas.jpg" alt="Arabian Oryx herd">
+                <h3>Saving the Arabian Oryx – A Success Story</h3>
+                <p>In <strong>1968</strong>, the late Sheikh Zayed bin Sultan Al Nahyan started a captive breeding program in Al Ain, which later expanded to Sir Bani Yas Island [citation:2][citation:3].</p>
+                <p>In <strong>2011</strong>, the oryx made history as the <strong>first species ever</strong> upgraded from "Extinct in the Wild" to "Vulnerable" on the IUCN Red List [citation:3].</p>
+                <p>By 2023, the UAE's Arabian Oryx population reached <strong>8,016</strong>, with 5,679 in Abu Dhabi alone [citation:3].</p>
+                <h3>Bigger Efforts</h3>
+                <ul class="effort-list">
+                    <li><i class="fas fa-map-marker-alt"></i> <strong>55 land and marine reserves</strong> across the UAE [citation:1].</li>
+                    <li><i class="fas fa-tree"></i> Goal of planting <strong>100 million mangrove trees</strong>.</li>
+                    <li><i class="fas fa-globe"></i> Cooperation with other countries for breeding and reintroduction programs.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- THE SOLUTION -->
+        <div id="solution" class="section">
+            <h2><i class="fas fa-lightbulb"></i> The Solution</h2>
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2016/11/22/19/25/green-1850193_1280.jpg" alt="Hands holding plant">
+                <ul class="solution-list">
+                    <li><i class="fas fa-shield-alt"></i> <strong>Protect habitats</strong> – Create reserves.</li>
+                    <li><i class="fas fa-baby"></i> <strong>Breed endangered species</strong>.</li>
+                    <li><i class="fas fa-undo-alt"></i> <strong>Reintroduce animals</strong> to the wild.</li>
+                    <li><i class="fas fa-seedling"></i> <strong>Plant trees</strong> – Restore ecosystems.</li>
+                    <li><i class="fas fa-ban"></i> <strong>Stop pollution</strong>.</li>
+                    <li><i class="fas fa-solar-panel"></i> <strong>Fight climate change</strong>.</li>
+                </ul>
+                <div class="highlight-box"><i class="fas fa-heart"></i> Bottom line: When we care and act, nature can heal. The Arabian Oryx proves it.</div>
+            </div>
+        </div>
+
+        <!-- CONCLUSION -->
+        <div id="conclusion" class="section">
+            <h2><i class="fas fa-check-circle"></i> Conclusion</h2>
+            <div class="card">
+                <img src="https://cdn.pixabay.com/photo/2017/04/08/07/59/arabian-oryx-2212760_1280.jpg" alt="Arabian Oryx portrait">
+                <p>Biodiversity is our planet's life support system. It gives us air, water, and food. But it's fragile and facing real threats.</p>
+                <p>The story of the <strong>Arabian Oryx</strong> shows us something important: extinction doesn't have to be the end.</p>
+                <p>With care, effort, and protected areas, we can bring nature back. The oryx proves that hope is real.</p>
+                <div class="highlight-box"><i class="fas fa-dove"></i> The choice is ours — and the oryx proves that hope is real. <i class="fas fa-dove"></i></div>
+            </div>
+        </div>
+
+        <!-- REFERENCES -->
+        <div id="references" class="section">
+            <h2><i class="fas fa-book"></i> References</h2>
+            <div class="card">
+                <h3>Sources Used in This Project</h3>
+                <ul class="solution-list">
+                    <li><i class="fas fa-globe"></i> <strong>MOCCAE UAE</strong> – Arabian Oryx Reserve & Ecotourism Details (2024)</li>
+                    <li><i class="fas fa-globe"></i> <strong>IUCN World Conservation Congress</strong> – Enhancing Arabian Oryx Conservation (2025)</li>
+                    <li><i class="fas fa-newspaper"></i> <strong>Gulf News</strong> – "Watch: How UAE brought Arabian oryx back from the brink of extinction" (2024)</li>
+                    <li><i class="fas fa-globe"></i> <strong>Environment Agency – Abu Dhabi</strong> – Arabian Oryx facts (2024)</li>
+                    <li><i class="fas fa-newspaper"></i> <strong>Aletihad News</strong> – "Return of the Arabian oryx: Conservation efforts lie at heart of UAE capital" (2024)</li>
+                </ul>
+                <div class="highlight-box" style="margin-top:20px;">
+                    <i class="fas fa-user-graduate"></i> Ahmed Mohamed | Class 7J | Al Nahda School | 2026
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function showSection(sectionId, linkElement) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => section.classList.remove('active-section'));
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) targetSection.classList.add('active-section');
+            const navLinks = document.querySelectorAll('.sidebar nav a');
+            navLinks.forEach(link => link.classList.remove('active'));
+            if (linkElement) linkElement.classList.add('active');
+            document.getElementById('mainContent').scrollTop = 0;
+        }
+        window.addEventListener('hashchange', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const link = document.querySelector(`.sidebar nav a[href="#${hash}"]`);
+                showSection(hash, link);
+            }
+        });
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                const link = document.querySelector(`.sidebar nav a[href="#${hash}"]`);
+                showSection(hash, link);
+            }
+        });
+    </script>
+</body>
+</html>
